@@ -16,15 +16,19 @@ export class UserController {
     }
 
     @Post()
-    async create(@Body() userData: CreateUserDto) {
-        const newUser =  this.repoService.userRepo.create(
-        {
-            email: userData.email
-        })
-
-        this.repoService.userRepo.save(newUser)
-
-        return newUser
+    async createOrDetect(@Body() userData: CreateUserDto) {
+        let user = await this.repoService.userRepo.findOne({email: userData.email})
+        
+        if (!user) {
+            user = this.repoService.userRepo.create(
+            {
+                email: userData.email
+            })
+    
+            this.repoService.userRepo.save(user)
+        }
+        
+        return user
     }
 
 }
