@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 import { User } from "./user.entity";
 
 @Entity('messages')
@@ -8,7 +8,7 @@ export class Message {
     id: number;
 
     @Column()
-    user_id: string;
+    user_id: number;
     
     @Column()
     content: string;
@@ -23,6 +23,6 @@ export class Message {
         () => User,
         user => user.messageConnection
     )
-
+    @JoinColumn({name: 'user_id'})
     userConnection: Promise<User>;
 }
