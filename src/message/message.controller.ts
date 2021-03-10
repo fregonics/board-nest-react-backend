@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Post, Query } from '@nestjs/common';
 import RepoService from 'src/repo.service';
 
 interface CreateMessageDto {
@@ -12,8 +12,12 @@ export class MessageController {
     public constructor(public readonly repoService: RepoService) {}
 
     @Get()
-    async show() {
-        return await this.repoService.messageRepo.find()
+    async show(@Query('user') user: string) {
+        if(!user) return await this.repoService.messageRepo.find()
+
+        return await this.repoService.messageRepo.find({where: {
+            user_id: parseInt(user, 10)
+        }})
     }
 
     @Post()
