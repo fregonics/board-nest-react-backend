@@ -6,7 +6,7 @@ const ormOptions : TypeOrmModuleOptions = {
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "senhaforte",
+    password: "senha",
     database: "yt",
     entities: [path.resolve(__dirname, '..', 'db', 'models', '*')],
     migrations: [path.resolve(__dirname, '..', 'db', 'migrations', '*')]
