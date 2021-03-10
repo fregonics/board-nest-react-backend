@@ -13,8 +13,14 @@ export class MessageController {
 
     @Get()
     async show(@Query('user') user: string) {
-        if(!user) return await this.repoService.messageRepo.find()
-
+        if(!user){
+            return await this.repoService.messageRepo
+                .createQueryBuilder('messages')
+                .leftJoin('users', 'u')
+                .addSelect('u.email')
+                .getMany()
+        } 
+        
         return await this.repoService.messageRepo.find({where: {
             user_id: parseInt(user, 10)
         }})
