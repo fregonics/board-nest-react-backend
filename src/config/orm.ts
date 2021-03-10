@@ -1,7 +1,7 @@
 import * as path from 'path'
 import { TypeOrmModuleOptions } from '@nestjs/typeorm'
 
-const options : TypeOrmModuleOptions = {
+const ormOptions : TypeOrmModuleOptions = {
     type: 'mysql',
     host: "localhost",
     port: 3306,
@@ -12,4 +12,4 @@ const options : TypeOrmModuleOptions = {
     migrations: [path.resolve(__dirname, '..', 'db', 'migrations', '*')]
 }
 
-module.exports = options;
+module.exports = ormOptions;

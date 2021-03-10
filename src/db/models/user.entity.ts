@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 import { Message } from "./message.entity";
 
-@Entity()
+@Entity('users')
 export class User {
 
     @PrimaryGeneratedColumn()
